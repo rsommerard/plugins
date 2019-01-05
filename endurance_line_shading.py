@@ -91,7 +91,7 @@ class LineShading(inkex.Effect):
           dest="active-tab",
           help="The selected UI-tab when OK was pressed")
 
-    def drawfunction(self, image_w, image_h, file):    
+    def drawfunction(self, image_w, image_h, file):
       reader = png.Reader(file)
       w, h, pixels, metadata = reader.read_flat()          
       matrice = [[1.0 for i in range(w)]for j in range(h)] 
@@ -300,7 +300,7 @@ class LineShading(inkex.Effect):
       t = 'translate('+ x +','+ y +')'
       newpath.set('transform', t)
       image_w = float(node.get('width'))
-      image_h = float(node.get('height'))          
+      image_h = float(node.get('height'))
       newpath.set('d', simplepath.formatPath(self.drawfunction(image_w, image_h, file)))
       newpath.set('title', 'Line_Shading')
       node.getparent().append(newpath)
@@ -320,7 +320,7 @@ class LineShading(inkex.Effect):
         w_png = str(round(poinnt_per_min_period*image_w*float(h_png)/max_period/image_h))
       id = node.get('id') 
       cmd = ["inkscape", current_file, "--export-png", file, "-w", w_png, "-h", h_png, "--export-background", "rgb(255, 255, 255)", "--export-background-opacity", "255", "--export-id", id]
-      proc = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+      proc = subprocess.Popen(cmd, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
       return_code = proc.wait()
       #f = proc.stdout
       #err = proc.stderr
@@ -332,7 +332,7 @@ class LineShading(inkex.Effect):
           image_selected_flag = True
           tmp_dir = tempfile.mkdtemp()
           png_temp_file = os.path.join(tmp_dir, "LineShading.png")
-          self.export_png(node, png_temp_file)                    
+          self.export_png(node, png_temp_file)
           self.draw_path(node, png_temp_file)
           shutil.rmtree(tmp_dir)
           if self.options.remove:
