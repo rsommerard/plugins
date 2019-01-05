@@ -310,7 +310,7 @@ class LineShading(inkex.Effect):
       image_w = float(node.get('width'))
       image_h = float(node.get('height'))
       min_period = self.options.min_period 
-      max_period = self.options.min_period        
+      max_period = self.options.max_period
       poinnt_per_min_period = 8.0           
       current_file = self.args[-1]
       h_png = str(self.options.num_lines)
